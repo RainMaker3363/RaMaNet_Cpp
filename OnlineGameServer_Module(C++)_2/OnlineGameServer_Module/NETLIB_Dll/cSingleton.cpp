@@ -1,6 +1,4 @@
-#include "CSingleton.h"
-
-cSingleton::SINGLETON_LIST cSingleton::m_listSingleton;
+#include "PreCompile.h"
 
 cSingleton::cSingleton()
 {
@@ -36,3 +34,5 @@ void cSingleton::ReleaseAll()
 
 	m_listSingleton.clear();
 }
+
+cSingleton::SINGLETON_LIST cSingleton::m_listSingleton;

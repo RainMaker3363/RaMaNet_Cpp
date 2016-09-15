@@ -1,15 +1,21 @@
-#include "cSingleton.h"
-
-#define MAX_VBUFFER_SIZE 1024
-#define PACKET_SIZE_LENGTH 4
-#define MAX_PBUFSIZE 1024
+#pragma once
 
 class NETLIB_API cVBuffer : public cSingleton
 {
 	DECLEAR_SINGLETON(cVBuffer);
 
+private:
+	char* m_pszVBuffer;	// 실제 버퍼
+	char* m_pCurMark;	// 현재 버퍼 위치
+	int m_nMaxBufSize;	// 최대 버퍼 사이즈
+
+	int m_nCurBufSize;	// 현재 사용된 버퍼 사이즈
+
+	cVBuffer(const cVBuffer &rhs);
+	cVBuffer &operator=(const cVBuffer &rhs);
+
 public:
-	cVBuffer(int nMaxBufSize = MAX_VBUFFER_SIZE);
+	cVBuffer(int nMaxBufSize = 1024 * 50);
 	virtual ~cVBuffer();
 
 	void GetChar(char& cCh);
@@ -34,15 +40,7 @@ public:
 	bool CopyBuffer(char* pDestBuffer);
 	void Init();
 	
-private:
-	char* m_pszVBuffer;	// 실제 버퍼
-	char* m_pCurMark;	// 현재 버퍼 위치
-	int m_nMaxBufSize;	// 최대 버퍼 사이즈
 
-	int m_nCurBufSize;	// 현재 사용된 버퍼 사이즈
-
-	cVBuffer(const cVBuffer &rhs);
-	cVBuffer &operator=(const cVBuffer &rhs);
 
 
 };

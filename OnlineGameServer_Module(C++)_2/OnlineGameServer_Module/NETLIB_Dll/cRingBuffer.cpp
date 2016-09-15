@@ -1,3 +1,4 @@
+#include "PreCompile.h"
 #include "cRingBuffer.h"
 
 cRingBuffer::cRingBuffer()
@@ -128,6 +129,20 @@ void cRingBuffer::ReleaseBuffer(int nRleaseSize)
 		m_nUserBufferSize -= nRleaseSize;
 	}
 
+}
+
+//사용된 버퍼양 설정(이것을 하는 이유는 SendPost()함수가 멀티 쓰레드에서 돌아가기때문에
+//PrepareSendPacket()에서(ForwardMark()에서) 사용된 양을 늘려버리면 PrepareSendPacket한다음에 데이터를
+//채워 넣기전에 바로 다른 쓰레드에서 SendPost()가 불린다면 엉뚱한 쓰레기 데이터가 갈 수 있다.
+//그걸 방지하기 위해 데이터를 다 채운 상태에서만 사용된 버퍼 사이즈를 설정할 수 있어야한다.
+//이함수는 sendpost함수에서 불리게 된다.
+void cRingBuffer::SetUsedBufferSize(int nUsedBufferSize)
+{
+	cMonitor::Owner lock(m_csRingBuffer);
+	{
+		m_nUserBufferSize += nUsedBufferSize;
+		m_uiAllUserBufSize += nUsedBufferSize;
+	}
 }
 
 char* cRingBuffer::GetBuffer(int nReadSize, int* pReadSize)

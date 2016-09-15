@@ -1,4 +1,6 @@
-#include "cVBuffer.h"
+#include "precompile.h"
+#include "cvbuffer.h"
+#include "CommonDef.h"
 
 IMPLEMENT_SINGLETON(cVBuffer);
 

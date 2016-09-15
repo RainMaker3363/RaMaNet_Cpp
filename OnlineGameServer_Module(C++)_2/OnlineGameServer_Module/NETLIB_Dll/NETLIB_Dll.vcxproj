@@ -20,7 +20,7 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -79,14 +79,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="cConnection.h" />
+    <ClInclude Include="cIocpServer.h" />
+    <ClInclude Include="cLog.h" />
     <ClInclude Include="cMonitor.h" />
+    <ClInclude Include="CommonDef.h" />
     <ClInclude Include="cQueue.h" />
     <ClInclude Include="cRingBuffer.h" />
     <ClInclude Include="cSingleton.h" />
     <ClInclude Include="cThread.h" />
     <ClInclude Include="cVBuffer.h" />
+    <ClInclude Include="PreCompile.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cConnection.cpp" />
+    <ClCompile Include="cIocpServer.cpp" />
+    <ClCompile Include="cLog.cpp" />
     <ClCompile Include="cMonitor.cpp" />
     <ClCompile Include="cRingBuffer.cpp" />
     <ClCompile Include="cSingleton.cpp" />

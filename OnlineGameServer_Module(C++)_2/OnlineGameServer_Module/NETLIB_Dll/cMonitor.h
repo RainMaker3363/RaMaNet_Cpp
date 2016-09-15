@@ -1,11 +1,4 @@
-#ifdef NETLIB_DLL_EXPORTS
-#define NETLIB_API _declspec(dllexport)
-#else
-#define NETLIB_API _declspec(dllimport)
-#endif
-
-#include <Windows.h>
-#include <process.h>
+#pragma once
 
 class NETLIB_API cMonitor
 {

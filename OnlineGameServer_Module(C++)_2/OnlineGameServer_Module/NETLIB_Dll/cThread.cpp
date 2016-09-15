@@ -1,4 +1,6 @@
+#include "precompile.h"
 #include "cThread.h"
+#include "cLog.h"
 
 cThread::cThread()
 {

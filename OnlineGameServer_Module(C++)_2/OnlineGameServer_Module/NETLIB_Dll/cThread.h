@@ -1,16 +1,14 @@
 #pragma once
 
-#ifdef NETLIB_DLL_EXPORTS
-#define NETLIB_API _declspec(dllexport)
-#else
-#define NETLIB_API _declspec(dllimport)
-#endif
-
-#include <Windows.h>
-#include <process.h>
-
 class NETLIB_API cThread
 {
+protected:
+	HANDLE	m_hThread;
+	HANDLE  m_hQuietEvent;
+	bool    m_bIsRun;
+	DWORD	m_dwWaitTick;
+	DWORD	m_dwTickCount;
+
 public:
 	cThread();
 	~cThread();
@@ -25,10 +23,5 @@ public:
 	inline DWORD GetTickCount() { return m_dwTickCount; }
 	bool IsRun() { return m_bIsRun; }
 
-protected:
-	HANDLE	m_hThread;
-	HANDLE  m_hQuietEvent;
-	bool    m_bIsRun;
-	DWORD	m_dwWaitTick;
-	DWORD	m_dwTickCount;
+
 };

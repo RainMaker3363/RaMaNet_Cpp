@@ -1,4 +1,5 @@
-#include "CMonitor.h"
+#include "PreCompile.h"
+#include "cMonitor.h"
 
 cMonitor::cMonitor()
 {

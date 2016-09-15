@@ -1,12 +1,23 @@
 #pragma once
 
-#include "cMonitor.h"
-
-#define MAX_QUEUESIZE 50
-
 template<class TYPE>
 class cQueue : public cMonitor
 {
+private:
+	// 실제 데이터를 저장하는 데이터 배열
+	TYPE*	m_arrQueue;
+	int		m_nQueueMaxSize;
+
+	// 큐의 동기화를 위한 변수
+	cMonitor	m_csQueue;
+
+	int		m_nCurSize;
+	// 큐의 들어있는 데이터 중 가장 마지막을 가리키고 있는 변수
+	int		m_nEndMark;
+
+	// 큐에 들어있는 데이터 중 가장 처음을 가리키고 있는 변수
+	int		m_nBeginMark;
+
 public:
 	cQueue(int nMaxSize = MAX_QUEUESIZE);
 	~cQueue();
@@ -32,20 +43,7 @@ public:
 	void SetQueueMaxSize(int nMaxSize) { m_nQueueMaxSize = nMaxSize; }
 	void ClearQueue();
 
-private:
-	// 실제 데이터를 저장하는 데이터 배열
-	TYPE*	m_arrQueue;
-	int		m_nQueueMaxSize;
 
-	// 큐의 동기화를 위한 변수
-	cMonitor	m_csQueue;
-
-	int		m_nCurSize;
-	// 큐의 들어있는 데이터 중 가장 마지막을 가리키고 있는 변수
-	int		m_nEndMark;
-
-	// 큐에 들어있는 데이터 중 가장 처음을 가리키고 있는 변수
-	int		m_nBeginMark;
 };
 
 template<class TYPE>
